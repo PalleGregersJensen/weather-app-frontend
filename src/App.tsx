@@ -16,7 +16,7 @@ function App() {
                 <InputField />
             </div>
             <div>
-                <GoogleMap/>
+                <GoogleMap />
             </div>
         </>
     );
