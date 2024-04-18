@@ -4,6 +4,7 @@ import InputField from "./components/InputField";
 import Header from "./components/Header";
 import GoogleMap from "./components/GoogleMap";
 import { getWeatherData } from "./rest-service/weatherData";
+import Footer from "./components/Footer";
 
 export default function App() {
     const [weatherData, setWeatherData] = useState(null);
@@ -31,15 +32,18 @@ export default function App() {
             <div className="header-weather-app">
                 <Header />
             </div>
-            <div>
+            <div className="inputfield">
                 <InputField
                     fetchWeatherData={fetchWeatherData}
                     loading={loading}
                     onWeatherDataUpdate={handleWeatherData}
                 />
             </div>
-            <div>
+            <div className="google-map">
                 <GoogleMap weatherData={weatherData} /> {/* Pass weatherData to GoogleMap component */}
+            </div>
+            <div className="footer">
+                <Footer /> 
             </div>
         </>
     );

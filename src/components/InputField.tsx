@@ -56,7 +56,7 @@ export default function InputField({ onWeatherDataUpdate }) {
                                         <strong>Position:</strong>
                                     </p>
                                     <p>
-                                        <strong>Lat:</strong> {value.lat}, <strong>Lng:</strong> {value.lng}
+                                        <strong>Lat:</strong> {(value as { lat: number; lng: number }).lat}, <strong>Lng:</strong> {(value as { lat: number; lng: number }).lng}
                                     </p>
                                 </div>
                             ) : (
