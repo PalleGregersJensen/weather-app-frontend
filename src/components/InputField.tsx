@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { getWeatherData } from "../rest-service/weatherData";
 
-export default function InputField() {
+//@ts-expect-error - event mangler i InputField
+export default function InputField({ onWeatherDataUpdate }) {
     const [cityName, setCityName] = useState("");
     const [weatherData, setWeatherData] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    //@ts-expect-error - event mangler i useEffect
     const handleChange = (event) => {
         console.log(event.target.value);
         setCityName(event.target.value);
     };
-
+    //@ts-expect-error - event mangler i useEffect
     const handleSubmit = (event) => {
         event.preventDefault();
         setLoading(true);
         getWeatherData(cityName)
             .then((data) => {
                 setWeatherData(data);
+                console.log("Weather data fetched:", typeof data);
+                onWeatherDataUpdate(data); // Kalder funktionen med de opdaterede vejrdata
                 setLoading(false);
             })
             .catch((error) => {
@@ -27,9 +31,10 @@ export default function InputField() {
 
     useEffect(() => {
         if (cityName !== "") {
-            handleSubmit();
+            handleSubmit(event);
         }
     }, []);
+
 
     return (
         <div>
@@ -44,9 +49,22 @@ export default function InputField() {
                 <div>
                     <h2>Vejrdata for {cityName}:</h2>
                     {Object.entries(weatherData).map(([key, value]) => (
-                        <p key={key}>
-                            <strong>{key}:</strong> {value}
-                        </p>
+                        <div key={key}>
+                            {key === "position" ? (
+                                <div>
+                                    <p>
+                                        <strong>Position:</strong>
+                                    </p>
+                                    <p>
+                                        <strong>Lat:</strong> {value.lat}, <strong>Lng:</strong> {value.lng}
+                                    </p>
+                                </div>
+                            ) : (
+                                <p>
+                                    <strong>{key}:</strong> {value}
+                                </p>
+                            )}
+                        </div>
                     ))}
                 </div>
             )}
