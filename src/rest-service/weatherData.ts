@@ -18,6 +18,7 @@ async function getWeatherData(cityName: string) {
         return { location, temperature, descriptionOfWeather, weatherConditions, position: { lat, lng } };
     } catch (error) {
         console.error("An error occurred while fetching weather data:", error);
+        return { location: "Unknown", temperature: "Unkown", descriptionOfWeather: "Unknown", weatherConditions: "Unknown", position: { lat:0, lng: 0 } };
     }
 }
 
