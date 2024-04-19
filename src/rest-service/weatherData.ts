@@ -1,6 +1,6 @@
 async function getWeatherData(cityName: string) {
     try {
-        const response = await fetch(`http://localhost:8080/api/v1/joke?about=${cityName}`);
+        const response = await fetch(`http://localhost:8080/api/v1/weather?about=${cityName}`);
         const data = await response.json();
         console.log("Data fetched:", data);
 

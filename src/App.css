@@ -13,17 +13,15 @@ body {
   font-size: 1.25em;
   font-weight: bold;
   color: #333;
-  margin-top: 0; /* Tilføjet for at fjerne øverste margen */
-  padding-top: 0%;
+  margin: 0; /* Tilføjet for at fjerne øverste margen */
+  padding: 0%;
+  border-bottom: 0.1em solid black;
 }
 
 .inputfield {
   width: 90%;
   padding: 1.5em;
   margin: 1em;
-  /* border: 1px solid #ccc; */
-  /* border-radius: 4px; */
-  /* box-sizing: border-box; */
 
 }
 
@@ -31,14 +29,11 @@ body {
   width: 90vw;
   height: 90%;
   justify-content: center;
-  margin-left: 1em;
+  margin-left: 2.6em;
   margin-right: 1em;
   display: grid;
   grid-template-columns: 1fr;
-  /* margin: 1em; */
-  /* border: 1px solid #ccc; */
-  /* border-radius: 4px; */
-  /* box-sizing: border-box; */
+  border: solid 0.1em black;
 }
 
 .footer{
@@ -50,7 +45,6 @@ body {
   font-size: 1.25em;
   font-weight: bold;
   color: #333;
-  margin-top: 0; /* Tilføjet for at fjerne øverste margen */
   padding-top: 0%;
   border-top: black solid 0.1em;
   margin-top: 1em;

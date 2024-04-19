@@ -15,7 +15,7 @@ useEffect(() => {
 }, [weatherData]);
 
     return (
-        <APIProvider apiKey={process.env.REACT_APP_API_KEY}>
+        <APIProvider apiKey={process.env.REACT_APP_API_KEY ?? ''}>
             <div style={{ height: "100vh", width: "100%" }}>
                 <Map zoom={7} center={position} mapId={process.env.REACT_APP_MAP_ID}>
                     <AdvancedMarker position={position}></AdvancedMarker>

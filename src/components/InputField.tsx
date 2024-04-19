@@ -1,26 +1,35 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getWeatherData } from "../rest-service/weatherData";
 
-//@ts-expect-error - event mangler i InputField
+interface WeatherData {
+    location: string;
+    temperature: string;
+    descriptionOfWeather: string;
+    weatherConditions: string;
+    position: {
+        lat: number;
+        lng: number;
+    };
+}
+
 export default function InputField({ onWeatherDataUpdate }) {
     const [cityName, setCityName] = useState("");
-    const [weatherData, setWeatherData] = useState(null);
+    const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [loading, setLoading] = useState(false);
 
-    //@ts-expect-error - event mangler i useEffect
-    const handleChange = (event) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(event.target.value);
         setCityName(event.target.value);
     };
-    //@ts-expect-error - event mangler i useEffect
-    const handleSubmit = (event) => {
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);
         getWeatherData(cityName)
-            .then((data) => {
+            .then((data: WeatherData) => {
                 setWeatherData(data);
                 console.log("Weather data fetched:", typeof data);
-                onWeatherDataUpdate(data); // Kalder funktionen med de opdaterede vejrdata
+                onWeatherDataUpdate(data);
                 setLoading(false);
             })
             .catch((error) => {
@@ -35,37 +44,32 @@ export default function InputField({ onWeatherDataUpdate }) {
         }
     }, []);
 
-
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <h2>Input field</h2>
+                <h2>Find weather data for cities around the world</h2>
                 <label htmlFor="cityName">Enter name of city:</label>
                 <input type="text" id="cityName" value={cityName} onChange={handleChange} />
-                <button type="submit">Hent vejrdata</button>
+                <button type="submit">Get weather data</button>
             </form>
             {loading && <p>Loading...</p>}
             {weatherData && (
                 <div>
-                    <h2>Vejrdata for {cityName}:</h2>
-                    {Object.entries(weatherData).map(([key, value]) => (
-                        <div key={key}>
-                            {key === "position" ? (
-                                <div>
-                                    <p>
-                                        <strong>Position:</strong>
-                                    </p>
-                                    <p>
-                                        <strong>Lat:</strong> {(value as { lat: number; lng: number }).lat}, <strong>Lng:</strong> {(value as { lat: number; lng: number }).lng}
-                                    </p>
-                                </div>
-                            ) : (
-                                <p>
-                                    <strong>{key}:</strong> {value}
-                                </p>
-                            )}
-                        </div>
-                    ))}
+                    <h2>Weather data for {cityName}:</h2>
+                    <div key={weatherData.location}>
+                        <p>
+                            <strong>Location:</strong> {weatherData.location}
+                        </p>
+                        <p>
+                            <strong>Temperature:</strong> {weatherData.temperature}
+                        </p>
+                        <p>
+                            <strong>Description of weather:</strong> {weatherData.descriptionOfWeather}
+                        </p>
+                        <p>
+                            <strong>Weather conditions:</strong> {weatherData.weatherConditions}
+                        </p>
+                    </div>
                 </div>
             )}
         </div>
