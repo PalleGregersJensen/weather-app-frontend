@@ -33,7 +33,6 @@ export default function App() {
     const fetchWeatherData = (cityName) => {
         setLoading(true);
         console.log("Fetching weather data for", cityName);
-        //@ts-expect-error type error
         getWeatherData(cityName).then(handleWeatherData)
             .catch((error) => {
                 console.error("Error fetching weather data:", error);

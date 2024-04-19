@@ -6,9 +6,9 @@ export default function GoogleMap({ weatherData}) {
     const [position, setPosition] = useState({ lat: 55.6761, lng: 12.5683 });
 
 useEffect(() => {
-    console.log("Weather data in GoogleMap component:", weatherData); // Tilføj denne linje
+    console.log("Weather data in GoogleMap component:", weatherData);
     if (weatherData && weatherData.position) {
-        console.log("Position updated:", weatherData.position); // Tilføj denne linje
+        console.log("Position updated:", weatherData.position);
         setPosition(weatherData.position);
         console.log("Position updated:", weatherData.position);
     }

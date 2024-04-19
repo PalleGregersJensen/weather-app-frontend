@@ -27,13 +27,10 @@ export default function InputField({ onWeatherDataUpdate }) {
         setLoading(true);
         try {
             const data = await getWeatherData(cityName);
-            //@ts-expect-error type error
             setWeatherData(data);
             onWeatherDataUpdate(data);
-            // setError(null); // Reset error state
         } catch (error) {
             console.error("Error fetching weather data:", error);
-            // setError("An error occurred while fetching weather data. Please try again.");
         } finally {
             setLoading(false);
         }
